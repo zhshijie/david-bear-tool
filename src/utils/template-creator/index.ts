@@ -9,7 +9,7 @@ import * as vscode from 'vscode';
  */
 function createScssFileTemplate(directoryPath: string) {
 
-  let scssImageRootPath = vscode.workspace.getConfiguration().get('davidBear.scssImageRootPath') as string;
+  let scssImageRootPath = vscode.workspace.getConfiguration().get('davidBearTool.scssImageRootPath') as string;
   // 创建 container 中的 style.scss 文件
   const styleScssFilename = 'style.scss';
   const styleScssFilePath = directoryPath + '/' + styleScssFilename;

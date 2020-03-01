@@ -19,7 +19,7 @@
 	"contributes": {
     "configuration": {
       "properties": {
-        "davidBear.scssImageRootPath": {
+        "davidBearTool.scssImageRootPath": {
           "type": "string",
           "default": "modules/client/spa-modules",
           "description": "scss 中图片的根目录地址"
