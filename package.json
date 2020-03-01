@@ -5,7 +5,8 @@
 	"version": "0.0.1",
 	"engines": {
 		"vscode": "^1.42.0"
-	},
+  },
+  "publisher": "zsj",
 	"categories": [
 		"Other"
 	],
@@ -104,5 +105,10 @@
 		"mocha": "^7.0.1",
 		"typescript": "^3.7.5",
 		"vscode-test": "^1.3.0"
-	}
+  },
+  "repository": {
+		"type": "git",
+		"url": "https://github.com/zhshijie/david-bear-tool"
+	},
+	"homepage": "https://github.com/zhshijie/david-bear-tool"
 }
