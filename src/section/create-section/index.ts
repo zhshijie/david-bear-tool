@@ -8,8 +8,10 @@ let createSectionDisposable = vscode.commands.registerCommand('extension.davidBe
   const currentDir = args as vscode.Uri;
 
   // scss 中图片的根目录地址
-  // const scssRootPath = 'modules/client/spa-modules';
-  const scssImageRootPath = '/fdfasd';
+  let scssImageRootPath = vscode.workspace.getConfiguration().get('davidBear.scssImageRootPath') as string;
+  if (!scssImageRootPath) {
+    scssImageRootPath = 'modules/client/spa-modules';
+  }
 
   const currentDirectoryPath = currentDir.path;
 
@@ -198,11 +200,11 @@ export {
                 const writeStr = 
 `
 interface I${className}Props {
-location?: any
+  location?: any
 }
 
 export {
-I${className}Props
+  I${className}Props
 }
 `;
               const writeData = Buffer.from(writeStr, 'utf8');

@@ -17,6 +17,15 @@
 	],
 	"main": "./out/extension.js",
 	"contributes": {
+    "configuration": {
+      "properties": {
+        "davidBear.scssImageRootPath": {
+          "type": "string",
+          "default": "modules/client/spa-modules",
+          "description": "scss 中图片的根目录地址"
+        }
+      }
+    },
     "menus": {
       "commandPalette": [
         {

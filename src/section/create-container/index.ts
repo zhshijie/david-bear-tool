@@ -8,9 +8,10 @@ let createContainerDisposable = vscode.commands.registerCommand('extension.david
   const currentDir = args as vscode.Uri;
 
   // scss 中图片的根目录地址
-  // const scssRootPath = 'modules/client/spa-modules';
-  const scssImageRootPath = '/fdfasd';
-
+  let scssImageRootPath = vscode.workspace.getConfiguration().get('davidBear.scssImageRootPath') as string;
+  if (!scssImageRootPath) {
+    scssImageRootPath = 'modules/client/spa-modules';
+  }
   const currentDirectoryPath = currentDir.path;
 
   const lastContainersDirectoryPath = currentDirectoryPath;
@@ -65,18 +66,19 @@ interface I${className}State {
 
 class ${className} extends React.Component<I${className}Props, I${className}State> {
 
-store: ${className}Store = new ${className}Store({});
+  store: ${className}Store = new ${className}Store({});
 
-constructor(props: I${className}Props) {
-  super(props);
+  constructor(props: I${className}Props) {
+    super(props);
+  }
+
+  render() {
+    return (
+      <div styleName='container'></div>
+    )
+  }
 }
 
-render() {
-  return (
-    <div styleName='container'></div>
-  )
-}
-}
 export default ${className};
 `;
       const writeData = Buffer.from(writeStr, 'utf8');
@@ -150,7 +152,7 @@ class ${className}Store {
 }
 
 export {
-${className}Store 
+  ${className}Store 
 }
 `;
               const writeData = Buffer.from(writeStr, 'utf8');
@@ -163,7 +165,6 @@ ${className}Store
               const fileUri = vscode.Uri.file(filePath);
               const writeStr = 
 `
-
 
 interface I${className}StoreProps {
 
@@ -191,11 +192,11 @@ export {
                 const writeStr = 
 `
 interface I${className}Props {
-location?: any
+  location?: any
 }
 
 export {
-I${className}Props
+  I${className}Props
 }
 `;
               const writeData = Buffer.from(writeStr, 'utf8');

@@ -7,9 +7,10 @@ let createFunctionComponentDisposable = vscode.commands.registerCommand('extensi
   const currentDir = args as vscode.Uri;
 
   // scss 中图片的根目录地址
-  // const scssRootPath = 'modules/client/spa-modules';
-  const scssImageRootPath = '/fdfasd';
-
+  let scssImageRootPath = vscode.workspace.getConfiguration().get('davidBear.scssImageRootPath') as string;
+  if (!scssImageRootPath) {
+    scssImageRootPath = 'modules/client/spa-modules';
+  }
   const currentDirectoryPath = currentDir.path;
 
   const componentDirectoryName = 'components';
@@ -69,6 +70,7 @@ function create${className}Component(props: I${className}Props) {
     <div styleName='container'></div>
   )
 }
+
 export default React.memo(create${className}Component);
 `;
       const writeData = Buffer.from(writeStr, 'utf8');
@@ -133,7 +135,7 @@ interface I${className}Props {
 }
 
 export {
-I${className}Props
+  I${className}Props
 }
 `;
               const writeData = Buffer.from(writeStr, 'utf8');
