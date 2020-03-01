@@ -1,15 +1,16 @@
 {
 	"name": "david-bear-tool",
-	"displayName": "大卫熊文件操作插件",
-	"description": "大卫熊文件操作工具",
-	"version": "0.0.1",
+	"displayName": "david-bear-tool",
+	"description": "大卫熊项目规范的文件快捷创建插件",
+	"version": "0.0.5",
 	"engines": {
 		"vscode": "^1.42.0"
   },
   "publisher": "zsj",
 	"categories": [
 		"Other"
-	],
+  ],
+  "icon": "images/icon.png",
 	"activationEvents": [
     "onCommand:extension.davidBearToolCreateContainer",
     "onCommand:extension.davidBearToolCreateSection",

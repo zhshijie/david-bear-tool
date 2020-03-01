@@ -1,4 +1,4 @@
-# DavidBearTool README
+# DavidBearTool
 
 在指定的文件目录中，快速创建符合大卫熊项目规范的目录结构
 
