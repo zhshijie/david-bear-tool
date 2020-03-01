@@ -7,7 +7,7 @@ import {
   createConstantsDirectoryTemplate, 
   createScssFileTemplate } from '../../../utils/template-creator';
 
-let createFunctionComponentDisposable = vscode.commands.registerCommand('extension.davidBearCreateFunctionComponent', (args) => {
+let createFunctionComponentDisposable = vscode.commands.registerCommand('extension.davidBearToolCreateFunctionComponent', (args) => {
 
   const currentDir = args as vscode.Uri;
 

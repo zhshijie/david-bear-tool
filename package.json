@@ -10,10 +10,10 @@
 		"Other"
 	],
 	"activationEvents": [
-    "onCommand:extension.davidBearCreateContainer",
-    "onCommand:extension.davidBearCreateSection",
-    "onCommand:extension.davidBearCreateFunctionComponent",
-    "onCommand:extension.davidBearCreateClassComponent"
+    "onCommand:extension.davidBearToolCreateContainer",
+    "onCommand:extension.davidBearToolCreateSection",
+    "onCommand:extension.davidBearToolCreateFunctionComponent",
+    "onCommand:extension.davidBearToolCreateClassComponent"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
@@ -29,36 +29,36 @@
     "menus": {
       "commandPalette": [
         {
-          "command": "extension.davidBearCreateContainer"
+          "command": "extension.davidBearToolCreateContainer"
         },
         {
-          "command": "extension.davidBearCreateSection"
+          "command": "extension.davidBearToolCreateSection"
         },
         {
-          "command": "extension.davidBearCreateFunctionComponent"
+          "command": "extension.davidBearToolCreateFunctionComponent"
         },
         {
-          "command": "extension.davidBearCreateClassComponent"
+          "command": "extension.davidBearToolCreateClassComponent"
         }
       ],
       "explorer/context": [
         {
-					"command": "extension.davidBearCreateContainer",
+					"command": "extension.davidBearToolCreateContainer",
           "group": "navigation@3",
           "when": "resource =~ / *\/containers\/*/"
         },
         {
-					"command": "extension.davidBearCreateSection",
+					"command": "extension.davidBearToolCreateSection",
 					"group": "navigation@0",
           "when": "resourceFilename =~ /sections/"
         },
         {
-					"command": "extension.davidBearCreateFunctionComponent",
+					"command": "extension.davidBearToolCreateFunctionComponent",
 					"group": "navigation@0",
           "when": "resourceFilename =~ /component[s]/"
         },
         {
-					"command": "extension.davidBearCreateClassComponent",
+					"command": "extension.davidBearToolCreateClassComponent",
 					"group": "navigation@1",
           "when": "resourceFilename =~ /component[s]/"
 				}
@@ -67,19 +67,19 @@
     },
 		"commands": [
 			{
-				"command": "extension.davidBearCreateContainer",
+				"command": "extension.davidBearToolCreateContainer",
         "title": "[大卫熊指令] 创建 Container"
       },
       {
-				"command": "extension.davidBearCreateSection",
+				"command": "extension.davidBearToolCreateSection",
 				"title": "[大卫熊指令] 创建 Section"
       },
       {
-				"command": "extension.davidBearCreateFunctionComponent",
+				"command": "extension.davidBearToolCreateFunctionComponent",
 				"title": "[大卫熊指令] 创建 Function Component"
       },
       {
-				"command": "extension.davidBearCreateClassComponent",
+				"command": "extension.davidBearToolCreateClassComponent",
 				"title": "[大卫熊指令] 创建 Class Component"
       }
 		]

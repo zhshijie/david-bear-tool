@@ -9,7 +9,7 @@ import {
   createComponentsDirectoryTemplate, 
   createAssetDirectoryTemplate } from '../../utils/template-creator';
 
-let createSectionDisposable = vscode.commands.registerCommand('extension.davidBearCreateSection', (args) => {
+let createSectionDisposable = vscode.commands.registerCommand('extension.davidBearToolCreateSection', (args) => {
 
   const currentDir = args as vscode.Uri;
   const currentDirectoryPath = currentDir.path;

@@ -8,7 +8,7 @@ import {
   createConstantsDirectoryTemplate, 
   createScssFileTemplate } from '../../../utils/template-creator';
 
-let createClassComponentDisposable = vscode.commands.registerCommand('extension.davidBearCreateClassComponent', (args) => {
+let createClassComponentDisposable = vscode.commands.registerCommand('extension.davidBearToolCreateClassComponent', (args) => {
   // The code you place here will be executed every time your command is executed
 
   const currentDir = args as vscode.Uri;

@@ -9,7 +9,7 @@ import {
   createConstantsDirectoryTemplate, 
   createScssFileTemplate } from '../../utils/template-creator';
 
-let createContainerDisposable = vscode.commands.registerCommand('extension.davidBearCreateContainer', (args) => {
+let createContainerDisposable = vscode.commands.registerCommand('extension.davidBearToolCreateContainer', (args) => {
 
   const currentDir = args as vscode.Uri;
 
