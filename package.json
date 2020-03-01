@@ -10,7 +10,10 @@
 		"Other"
 	],
 	"activationEvents": [
-    "onCommand:extension.davidBearCreateContainer"
+    "onCommand:extension.davidBearCreateContainer",
+    "onCommand:extension.davidBearCreateSection",
+    "onCommand:extension.davidBearCreateFunctionComponent",
+    "onCommand:extension.davidBearCreateClassComponent"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
@@ -18,12 +21,33 @@
       "commandPalette": [
         {
           "command": "extension.davidBearCreateContainer"
+        },
+        {
+          "command": "extension.davidBearCreateSection"
+        },
+        {
+          "command": "extension.davidBearCreateFunctionComponent"
+        },
+        {
+          "command": "extension.davidBearCreateClassComponent"
         }
       ],
       "explorer/context": [
         {
 					"command": "extension.davidBearCreateContainer",
-					"group": "navigation"
+					"group": "navigation@0"
+        },
+        {
+					"command": "extension.davidBearCreateSection",
+					"group": "navigation@1"
+        },
+        {
+					"command": "extension.davidBearCreateFunctionComponent",
+					"group": "navigation@2"
+        },
+        {
+					"command": "extension.davidBearCreateClassComponent",
+					"group": "navigation@3"
 				}
       ]
      
@@ -32,6 +56,18 @@
 			{
 				"command": "extension.davidBearCreateContainer",
 				"title": "[大卫熊指令]创建 Container"
+      },
+      {
+				"command": "extension.davidBearCreateSection",
+				"title": "[大卫熊指令]创建 Section"
+      },
+      {
+				"command": "extension.davidBearCreateFunctionComponent",
+				"title": "[大卫熊指令]创建 Function Component"
+      },
+      {
+				"command": "extension.davidBearCreateClassComponent",
+				"title": "[大卫熊指令]创建 Class Component"
       }
 		]
 	},

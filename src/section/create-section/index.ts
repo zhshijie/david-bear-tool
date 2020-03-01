@@ -1,8 +1,8 @@
 
 import * as vscode from 'vscode';
-import { toUpperCamelCase } from './../../utils/index';
+import { toUpperCamelCase } from '../../utils/index';
 
-let createContainerDisposable = vscode.commands.registerCommand('extension.davidBearCreateContainer', (args) => {
+let createSectionDisposable = vscode.commands.registerCommand('extension.davidBearCreateSection', (args) => {
   // The code you place here will be executed every time your command is executed
 
   const currentDir = args as vscode.Uri;
@@ -13,7 +13,14 @@ let createContainerDisposable = vscode.commands.registerCommand('extension.david
 
   const currentDirectoryPath = currentDir.path;
 
-  const lastContainersDirectoryPath = currentDirectoryPath;
+  const sectionDirectoryName = 'section';
+  let lastIndexOfContainers = -1;
+  if ((lastIndexOfContainers = currentDirectoryPath.lastIndexOf(sectionDirectoryName)) === -1) {
+    vscode.window.showErrorMessage("当前目录和父节点中，没有找到 section 目录，请在 section 目录中创建");
+    return;
+  }
+
+  const lastSectionDirectoryPath = currentDirectoryPath.slice(0, lastIndexOfContainers + sectionDirectoryName.length);
 
   const options = {
     ignoreFocusOut: true,
@@ -23,39 +30,40 @@ let createContainerDisposable = vscode.commands.registerCommand('extension.david
 
   vscode.window.showInputBox(options).then((value) => {
   
-    const containerDirectoryPath =  lastContainersDirectoryPath + '/' + value;
-    const containerDirectoryUri = currentDir.with({path: containerDirectoryPath});      
+    const sectionDirectoryPath =  lastSectionDirectoryPath + '/' + value;
+    const sectionDirectoryUri = currentDir.with({path: sectionDirectoryPath});      
 
     const fs = vscode.workspace.fs;
 
-    const className = `${toUpperCamelCase(value)}Container`;
+    const className = `${toUpperCamelCase(value)}`;
 
-    fs.readDirectory(containerDirectoryUri)
+    fs.readDirectory(sectionDirectoryUri)
     .then((directoryArr)=> {
       if (directoryArr.length > 0) {
         vscode
         .window
-        .showWarningMessage(`${containerDirectoryPath} 已存在，是否要覆盖掉旧的文件目录`, '取消', '确定覆盖')
+        .showWarningMessage(`${sectionDirectoryPath} 已存在，是否要覆盖掉旧的文件目录`, '取消', '确定覆盖')
         .then( (selectedItem) => {
           if (selectedItem === '确定覆盖') {
-            return fs.createDirectory(containerDirectoryUri);
+            // 创建 container 文件夹
+            return fs.createDirectory(sectionDirectoryUri);
           }
         });
       }
     }, () => {
-      return fs.createDirectory(containerDirectoryUri);
+      // 创建 container 文件夹
+      return fs.createDirectory(sectionDirectoryUri);
     })
-    // 创建 container 文件夹
     .then(() => {
       // 创建 container 中的 index.tsx 文件
       const indexTsxFilename = 'index.tsx';
-      const indexTsxFilePath = containerDirectoryPath + '/' + indexTsxFilename;
+      const indexTsxFilePath = sectionDirectoryPath + '/' + indexTsxFilename;
       const indexTsxFileUri = vscode.Uri.file(indexTsxFilePath);
       const writeStr = `
 import React from 'react';
 import './style.scss';
-import { I${className}Props } from './declare';
 import * as Constants from './constants';
+import { I${className}Props } from './declare';
 import { ${className}Store } from './store';
 
 interface I${className}State {
@@ -66,7 +74,7 @@ class ${className} extends React.Component<I${className}Props, I${className}Stat
 
 store: ${className}Store = new ${className}Store({});
 
-constructor(props: any) {
+constructor(props: I${className}Props) {
   super(props);
 }
 
@@ -85,10 +93,10 @@ export default ${className};
     .then(() => {
       // 创建 container 中的 style.scss 文件
       const styleScssFilename = 'style.scss';
-      const styleScssFilePath = containerDirectoryPath + '/' + styleScssFilename;
+      const styleScssFilePath = sectionDirectoryPath + '/' + styleScssFilename;
       const styleScssFileUri = vscode.Uri.file(styleScssFilePath);
       
-      const scssRootPathSpliceContainerDirectoryPathResult = containerDirectoryPath.split(scssImageRootPath);
+      const scssRootPathSpliceContainerDirectoryPathResult = sectionDirectoryPath.split(scssImageRootPath);
       const imagesDirectoryPath = scssRootPathSpliceContainerDirectoryPathResult[scssRootPathSpliceContainerDirectoryPathResult.length-1] + '/assets/images';
       const writeStr = 
 `
@@ -105,7 +113,7 @@ $imgPrefix: '${imagesDirectoryPath}';
     .then(async () => {
       // 创建 container 中的 constant 目录
       const constantDirectoryName = 'constants';
-      const constantDirectoryPath = containerDirectoryPath + '/' + constantDirectoryName;
+      const constantDirectoryPath = sectionDirectoryPath + '/' + constantDirectoryName;
       const constantDirectoryUri = vscode.Uri.file(constantDirectoryPath);
       return fs.createDirectory(constantDirectoryUri)
              .then(() => {
@@ -125,7 +133,7 @@ export {
     .then(async () => {
       // 创建 container 中的 store 目录
       const directoryName = 'store';
-      const directoryPath = containerDirectoryPath + '/' + directoryName;
+      const directoryPath = sectionDirectoryPath + '/' + directoryName;
       const directoryUri = vscode.Uri.file(directoryPath);
       return fs.createDirectory(directoryUri)
             .then( () => {
@@ -179,7 +187,7 @@ export {
     .then(async () => {
       // 创建 container 中的 declare 目录
       const directoryName = 'declare';
-      const directoryPath = containerDirectoryPath + '/' + directoryName;
+      const directoryPath = sectionDirectoryPath + '/' + directoryName;
       const directoryUri = vscode.Uri.file(directoryPath);
       return fs.createDirectory(directoryUri)
               .then( () => {
@@ -201,21 +209,15 @@ I${className}Props
               return fs.writeFile(fileUri, writeData); 
             });
     }).then(() => {
-      // 创建 container 中的 section 目录
-      const directoryName = 'section';
-      const directoryPath = containerDirectoryPath + '/' + directoryName;
-      const directoryUri = vscode.Uri.file(directoryPath);
-      return fs.createDirectory(directoryUri);
-    }).then(() => {
       // 创建 container 中的 component 目录
-      const directoryName = 'component';
-      const directoryPath = containerDirectoryPath + '/' + directoryName;
+      const directoryName = 'components';
+      const directoryPath = sectionDirectoryPath + '/' + directoryName;
       const directoryUri = vscode.Uri.file(directoryPath);
       return fs.createDirectory(directoryUri);
     }).then(async () => {
       // 创建 container 中的 assets 目录
       const directoryName = 'assets';
-      const assetsDirectoryPath = containerDirectoryPath + '/' + directoryName;
+      const assetsDirectoryPath = sectionDirectoryPath + '/' + directoryName;
       const directoryUri = vscode.Uri.file(assetsDirectoryPath);
       return fs.createDirectory(directoryUri)
              .then(() => {
@@ -225,9 +227,6 @@ I${className}Props
                 const directoryUri = vscode.Uri.file(directoryPath);
                 return fs.createDirectory(directoryUri);
             });
-    })
-    .then((response) => {
-      console.log(response);
     });
 
   
@@ -237,5 +236,5 @@ I${className}Props
 });
 
 export {
-  createContainerDisposable
+  createSectionDisposable
 }

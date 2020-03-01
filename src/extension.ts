@@ -1,7 +1,10 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
-import { createContainerDisposable } from './section/createContainer/index';
+import { createContainerDisposable } from './section/create-container/index';
+import { createSectionDisposable } from './section/create-section/index';
+import { createFunctionComponentDisposable } from './section/create-component/function-component';
+import { createClassComponentDisposable } from './section/create-component/class-component';
 
 export class DavidBearError extends Error {
 
@@ -30,8 +33,17 @@ export function activate(context: vscode.ExtensionContext) {
 	// Now provide the implementation of the command with registerCommand
   // The commandId parameter must match the command field in package.json
  
-  // 大卫熊绘本创建 Container 指令
+  // 创建 Container 指令
   context.subscriptions.push(createContainerDisposable);
+
+  // 创建 Section 指令
+  context.subscriptions.push(createSectionDisposable);
+
+  // 创建 Function Component 指令
+  context.subscriptions.push(createFunctionComponentDisposable);
+
+  // 创建 Class Component 指令
+  context.subscriptions.push(createClassComponentDisposable);
 }
 
 // this method is called when your extension is deactivated
