@@ -16,4 +16,6 @@ function toUpperCamelCase(foo?: string) {
 
 export {
   toUpperCamelCase
-}
+};
+
+

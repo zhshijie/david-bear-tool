@@ -1,17 +1,18 @@
 
 import * as vscode from 'vscode';
 import { toUpperCamelCase } from '../../utils/index';
+import { 
+  createAssetDirectoryTemplate, 
+  createComponentsDirectoryTemplate, 
+  createDeclareDirectionTemplate, 
+  createStoreDirectoryTemplate, 
+  createConstantsDirectoryTemplate, 
+  createScssFileTemplate } from '../../utils/template-creator';
 
 let createContainerDisposable = vscode.commands.registerCommand('extension.davidBearCreateContainer', (args) => {
-  // The code you place here will be executed every time your command is executed
 
   const currentDir = args as vscode.Uri;
 
-  // scss 中图片的根目录地址
-  let scssImageRootPath = vscode.workspace.getConfiguration().get('davidBear.scssImageRootPath') as string;
-  if (!scssImageRootPath) {
-    scssImageRootPath = 'modules/client/spa-modules';
-  }
   const currentDirectoryPath = currentDir.path;
 
   const lastContainersDirectoryPath = currentDirectoryPath;
@@ -87,121 +88,19 @@ export default ${className};
   
     .then(() => {
       // 创建 container 中的 style.scss 文件
-      const styleScssFilename = 'style.scss';
-      const styleScssFilePath = containerDirectoryPath + '/' + styleScssFilename;
-      const styleScssFileUri = vscode.Uri.file(styleScssFilePath);
-      
-      const scssRootPathSpliceContainerDirectoryPathResult = containerDirectoryPath.split(scssImageRootPath);
-      const imagesDirectoryPath = scssRootPathSpliceContainerDirectoryPathResult[scssRootPathSpliceContainerDirectoryPathResult.length-1] + '/assets/images';
-      const writeStr = 
-`
-@import '@/commons/style/utils/bg-url.scss';
-$imgPrefix: '${imagesDirectoryPath}';
-
-.container {
-
-}
-`;
-      const writeData = Buffer.from(writeStr, 'utf8');
-      return fs.writeFile(styleScssFileUri, writeData);
+      return createScssFileTemplate(containerDirectoryPath);
     })
     .then(async () => {
       // 创建 container 中的 constant 目录
-      const constantDirectoryName = 'constants';
-      const constantDirectoryPath = containerDirectoryPath + '/' + constantDirectoryName;
-      const constantDirectoryUri = vscode.Uri.file(constantDirectoryPath);
-      return fs.createDirectory(constantDirectoryUri)
-             .then(() => {
-                // 创建 constants 中的 index.ts 文件
-                const filename = 'index.ts';
-                const filePath = constantDirectoryPath + '/' + filename;
-                const fileUri = vscode.Uri.file(filePath);
-                const writeStr = 
-`
-export {
-}
-`;
-                const writeData = Buffer.from(writeStr, 'utf8');
-                return fs.writeFile(fileUri, writeData); 
-            });
+      return createConstantsDirectoryTemplate(containerDirectoryPath);
     })
     .then(async () => {
       // 创建 container 中的 store 目录
-      const directoryName = 'store';
-      const directoryPath = containerDirectoryPath + '/' + directoryName;
-      const directoryUri = vscode.Uri.file(directoryPath);
-      return fs.createDirectory(directoryUri)
-            .then( () => {
-              // 创建 store 中的 index.ts 文件
-              const filename = 'index.ts';
-              const filePath = directoryPath + '/' + filename;
-              const fileUri = vscode.Uri.file(filePath);
-              const writeStr = 
-`
-
-import { I${className}StoreProps } from './declare';
-
-class ${className}Store {
-
-  props?: I${className}StoreProps;
-
-  constructor(props?: I${className}StoreProps) {
-    this.props = props;
-  }
-  
-}
-
-export {
-  ${className}Store 
-}
-`;
-              const writeData = Buffer.from(writeStr, 'utf8');
-              return fs.writeFile(fileUri, writeData); 
-            })
-            .then( () => {
-              // 创建 store 中的 index.ts 文件
-              const filename = 'declare.ts';
-              const filePath = directoryPath + '/' + filename;
-              const fileUri = vscode.Uri.file(filePath);
-              const writeStr = 
-`
-
-interface I${className}StoreProps {
-
-}
-
-export {
-  I${className}StoreProps
-}
-`;
-              const writeData = Buffer.from(writeStr, 'utf8');
-              return fs.writeFile(fileUri, writeData); 
-            });
+      return createStoreDirectoryTemplate(containerDirectoryPath, className);
     })
     .then(async () => {
       // 创建 container 中的 declare 目录
-      const directoryName = 'declare';
-      const directoryPath = containerDirectoryPath + '/' + directoryName;
-      const directoryUri = vscode.Uri.file(directoryPath);
-      return fs.createDirectory(directoryUri)
-              .then( () => {
-                // 创建 declare 中的 index.ts 文件
-                const filename = 'index.ts';
-                const filePath = directoryPath + '/' + filename;
-                const fileUri = vscode.Uri.file(filePath);
-                const writeStr = 
-`
-interface I${className}Props {
-  location?: any
-}
-
-export {
-  I${className}Props
-}
-`;
-              const writeData = Buffer.from(writeStr, 'utf8');
-              return fs.writeFile(fileUri, writeData); 
-            });
+      return createDeclareDirectionTemplate(containerDirectoryPath, className, true);
     }).then(() => {
       // 创建 container 中的 section 目录
       const directoryName = 'section';
@@ -210,23 +109,10 @@ export {
       return fs.createDirectory(directoryUri);
     }).then(() => {
       // 创建 container 中的 component 目录
-      const directoryName = 'components';
-      const directoryPath = containerDirectoryPath + '/' + directoryName;
-      const directoryUri = vscode.Uri.file(directoryPath);
-      return fs.createDirectory(directoryUri);
+      return createComponentsDirectoryTemplate(containerDirectoryPath);
     }).then(async () => {
       // 创建 container 中的 assets 目录
-      const directoryName = 'assets';
-      const assetsDirectoryPath = containerDirectoryPath + '/' + directoryName;
-      const directoryUri = vscode.Uri.file(assetsDirectoryPath);
-      return fs.createDirectory(directoryUri)
-             .then(() => {
-                // 创建 assets 中的 images 目录
-                const directoryName = 'images';
-                const directoryPath = assetsDirectoryPath + '/' + directoryName;
-                const directoryUri = vscode.Uri.file(directoryPath);
-                return fs.createDirectory(directoryUri);
-            });
+      return createAssetDirectoryTemplate(containerDirectoryPath);
     });
 
   
@@ -237,4 +123,4 @@ export {
 
 export {
   createContainerDisposable
-}
+};
