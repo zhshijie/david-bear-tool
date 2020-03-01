@@ -1,6 +1,6 @@
-# DavidBear README
+# DavidBearTool README
 
-This is the README for your extension "DavidBear". After writing up a brief description, we recommend including the following sections.
+This is the README for your extension "DavidBearTool". After writing up a brief description, we recommend including the following sections.
 
 ## Features
 
@@ -27,6 +27,15 @@ This extension contributes the following settings:
 * `myExtension.enable`: enable/disable this extension
 * `myExtension.thing`: set to `blah` to do something
 
+- 在 container 的子目录中，可以通过`鼠标右键 -> [大卫熊指令] 创建 Container` 创建 container 目录
+
+- 在 sections 或 section 的目录上，可以通过`鼠标右键 -> [大卫熊指令] 创建 Section` 创建 section 目录
+
+- 在 components 的目录上，可以通过`鼠标右键 -> [大卫熊指令] 创建 Function Component` 创建 Function Component 目录
+
+- 在 components 的目录上，可以通过`鼠标右键 -> [大卫熊指令] 创建 Class Component` 创建 Class Component 目录
+
+
 ## Known Issues
 
 Calling out known issues can help limit users opening duplicate issues against your extension.
@@ -37,15 +46,8 @@ Users appreciate release notes as you update your extension.
 
 ### 1.0.0
 
-Initial release of ...
+[add] 添加 
 
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
 
 -----------------------------------------------------------------------------------------------------------
 

@@ -103,7 +103,7 @@ export default ${className};
       return createDeclareDirectionTemplate(containerDirectoryPath, className, true);
     }).then(() => {
       // 创建 container 中的 section 目录
-      const directoryName = 'section';
+      const directoryName = 'sections';
       const directoryPath = containerDirectoryPath + '/' + directoryName;
       const directoryUri = vscode.Uri.file(directoryPath);
       return fs.createDirectory(directoryUri);

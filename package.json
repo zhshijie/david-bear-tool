@@ -1,7 +1,7 @@
 {
-	"name": "DavidBear",
-	"displayName": "DavidBear",
-	"description": "DavidBear",
+	"name": "david-bear-tool",
+	"displayName": "大卫熊文件操作插件",
+	"description": "大卫熊文件操作工具",
 	"version": "0.0.1",
 	"engines": {
 		"vscode": "^1.42.0"
@@ -44,19 +44,23 @@
       "explorer/context": [
         {
 					"command": "extension.davidBearCreateContainer",
-					"group": "navigation@0"
+          "group": "navigation@3",
+          "when": "resource =~ / *\/containers\/*/"
         },
         {
 					"command": "extension.davidBearCreateSection",
-					"group": "navigation@1"
+					"group": "navigation@0",
+          "when": "resourceFilename =~ /sections/"
         },
         {
 					"command": "extension.davidBearCreateFunctionComponent",
-					"group": "navigation@2"
+					"group": "navigation@0",
+          "when": "resourceFilename =~ /component[s]/"
         },
         {
 					"command": "extension.davidBearCreateClassComponent",
-					"group": "navigation@3"
+					"group": "navigation@1",
+          "when": "resourceFilename =~ /component[s]/"
 				}
       ]
      
@@ -64,19 +68,19 @@
 		"commands": [
 			{
 				"command": "extension.davidBearCreateContainer",
-				"title": "[大卫熊指令]创建 Container"
+        "title": "[大卫熊指令] 创建 Container"
       },
       {
 				"command": "extension.davidBearCreateSection",
-				"title": "[大卫熊指令]创建 Section"
+				"title": "[大卫熊指令] 创建 Section"
       },
       {
 				"command": "extension.davidBearCreateFunctionComponent",
-				"title": "[大卫熊指令]创建 Function Component"
+				"title": "[大卫熊指令] 创建 Function Component"
       },
       {
 				"command": "extension.davidBearCreateClassComponent",
-				"title": "[大卫熊指令]创建 Class Component"
+				"title": "[大卫熊指令] 创建 Class Component"
       }
 		]
 	},
