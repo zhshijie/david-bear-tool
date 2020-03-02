@@ -14,7 +14,7 @@ let createSectionDisposable = vscode.commands.registerCommand('extension.davidBe
   const currentDir = args as vscode.Uri;
   const currentDirectoryPath = currentDir.path;
 
-  const sectionDirectoryName = 'section';
+  const sectionDirectoryName = 'sections';
   let lastIndexOfContainers = -1;
   if ((lastIndexOfContainers = currentDirectoryPath.lastIndexOf(sectionDirectoryName)) === -1) {
     vscode.window.showErrorMessage("当前目录和父节点中，没有找到 section 目录，请在 section 目录中创建");

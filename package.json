@@ -2,7 +2,7 @@
 	"name": "david-bear-tool",
 	"displayName": "david-bear-tool",
 	"description": "大卫熊项目规范的文件快捷创建插件",
-	"version": "0.0.5",
+	"version": "0.0.6",
 	"engines": {
 		"vscode": "^1.42.0"
   },
@@ -52,17 +52,17 @@
         {
 					"command": "extension.davidBearToolCreateSection",
 					"group": "navigation@0",
-          "when": "resourceFilename =~ /sections/"
+          "when": "resource =~ / *\/sections\/*/"
         },
         {
 					"command": "extension.davidBearToolCreateFunctionComponent",
 					"group": "navigation@0",
-          "when": "resourceFilename =~ /component[s]/"
+          "when": "resource =~ / *\/component[s]\/*/"
         },
         {
 					"command": "extension.davidBearToolCreateClassComponent",
 					"group": "navigation@1",
-          "when": "resourceFilename =~ /component[s]/"
+          "when": "resource =~ / *\/component[s]\/*/"
 				}
       ]
      
