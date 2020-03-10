@@ -61,6 +61,7 @@ let createSectionDisposable = vscode.commands.registerCommand('extension.davidBe
       const writeStr = `
 import React from 'react';
 import './style.scss';
+import { observer } from 'mobx-react';
 import * as Constants from './constants';
 import { I${className}Props } from './declare';
 import { ${className}Store } from './store';
@@ -69,6 +70,7 @@ interface I${className}State {
 
 }
 
+@observer
 class ${className} extends React.Component<I${className}Props, I${className}State> {
 
   private store: ${className}Store = new ${className}Store({});
