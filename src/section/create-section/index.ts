@@ -71,7 +71,7 @@ interface I${className}State {
 
 class ${className} extends React.Component<I${className}Props, I${className}State> {
 
-  store: ${className}Store = new ${className}Store({});
+  private store: ${className}Store = new ${className}Store({});
 
   constructor(props: I${className}Props) {
     super(props);

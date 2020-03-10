@@ -84,7 +84,7 @@ import { I${className}StoreProps } from './declare';
 
 class ${className}Store {
 
-  props?: I${className}StoreProps;
+  private props?: I${className}StoreProps;
 
   constructor(props?: I${className}StoreProps) {
     this.props = props;
@@ -93,7 +93,7 @@ class ${className}Store {
 }
 
 export {
-${className}Store 
+  ${className}Store 
 }
 `;
               const writeData = Buffer.from(writeStr, 'utf8');
