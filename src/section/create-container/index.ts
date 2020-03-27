@@ -58,7 +58,6 @@ let createContainerDisposable = vscode.commands.registerCommand('extension.david
 import React from 'react';
 import './style.scss';
 import { observer } from 'mobx-react';
-import * as Constants from './constants';
 import { I${className}Props } from './declare';
 import { ${className}Store } from './store';
 
@@ -69,7 +68,7 @@ interface I${className}State {
 @observer
 class ${className} extends React.Component<I${className}Props, I${className}State> {
 
-  private store: ${className}Store = new ${className}Store({});
+  private store: ${className}Store = new ${className}Store();
 
   constructor(props: I${className}Props) {
     super(props);

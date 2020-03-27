@@ -62,7 +62,6 @@ let createFunctionComponentDisposable = vscode.commands.registerCommand('extensi
       const writeStr = `
 import React from 'react';
 import './style.scss';
-import * as Constants from './constants';
 import { I${className}Props } from './declare';
 
 function create${className}Component(props: I${className}Props) {

@@ -80,15 +80,8 @@ async function createStoreDirectoryTemplate(directoryPath: string, className: st
               const writeStr = 
 `
 
-import { I${className}StoreProps } from './declare';
 
 class ${className}Store {
-
-  private props?: I${className}StoreProps;
-
-  constructor(props?: I${className}StoreProps) {
-    this.props = props;
-  }
   
 }
 
@@ -107,12 +100,9 @@ export {
               const fileUri = vscode.Uri.file(filePath);
               const writeStr = 
 `
-interface I${className}StoreProps {
-
-}
 
 export {
-  I${className}StoreProps
+
 }
 `;
               const writeData = Buffer.from(writeStr, 'utf8');

@@ -64,7 +64,6 @@ let createClassComponentDisposable = vscode.commands.registerCommand('extension.
       const writeStr = `
 import React from 'react';
 import './style.scss';
-import * as Constants from './constants';
 import { I${className}Props } from './declare';
 
 interface I${className}State {
